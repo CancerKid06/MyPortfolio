@@ -120,23 +120,24 @@ export interface SiteDictionary {
   };
   skillsLeadership: {
     skillsHeading: string;
-    languagesBlock: {
+    skillsHint: string;
+    clearTagLabel: string;
+    skillsFilters: Array<{
+      id: 'all' | 'development' | 'security' | 'infrastructure';
+      label: string;
+    }>;
+    skillCategories: Array<{
+      id: string;
+      filter: 'development' | 'security' | 'infrastructure';
       index: string;
+      variant: 'accent-light' | 'neutral' | 'dark-featured' | 'bordered-white';
       title: string;
-      primary: Array<{
+      subtitle: string;
+      tags: Array<{
         name: string;
-        detail: string;
+        context: string;
       }>;
-      secondary: string[];
-    };
-    securityBlock: {
-      index: string;
-      title: string;
-      subgroups: Array<{
-        label: string;
-        items: string[];
-      }>;
-    };
+    }>;
     leadershipHeading: string;
     leadershipItems: Array<{
       title: string;
@@ -394,55 +395,179 @@ export const SITE_CONTENT: Record<Lang, SiteDictionary> = {
     },
     skillsLeadership: {
       skillsHeading: 'Skills',
-      languagesBlock: {
-        index: '01',
-        title: 'Languages and frameworks',
-        primary: [
-          {
-            name: 'Python',
-            detail: 'FastAPI · Flask · Django · scikit-learn · NumPy',
-          },
-          {
-            name: 'Kotlin',
-            detail: 'Jetpack Compose',
-          },
-          {
-            name: 'PHP',
-            detail: 'Laravel',
-          },
-        ],
-        secondary: ['Flutter', 'SQL', 'R', 'C'],
-      },
-      securityBlock: {
-        index: '02',
-        title: 'Security, networking and infrastructure',
-        subgroups: [
-          {
-            label: 'Security and defensive tools',
-            items: [
-              'Suricata',
-              'Kali Linux',
-              'pfSense',
-              'PortSwigger Web Security Academy training',
-            ],
-          },
-          {
-            label: 'Networking and routing',
-            items: [
-              'Cisco IOS',
-              'Packet Tracer',
-              'GNS3',
-              'VLANs',
-              'Static routing',
-              'RIPv2',
-            ],
-          },
-          {
-            label: 'Containers and cloud',
-            items: ['Docker', 'OpenStack'],
-          },
-        ],
-      },
+      skillsHint: 'Click any skill tag to see where I applied it.',
+      clearTagLabel: 'Clear',
+      skillsFilters: [
+        { id: 'all', label: 'All' },
+        { id: 'development', label: 'Development & ML' },
+        { id: 'security', label: 'Security' },
+        { id: 'infrastructure', label: 'Networking & Cloud' },
+      ],
+      skillCategories: [
+        {
+          id: 'backend-ml',
+          filter: 'development',
+          index: '01',
+          variant: 'accent-light',
+          title: 'Backend, web and ML',
+          subtitle: 'APIs, server frameworks, and machine learning tools',
+          tags: [
+            {
+              name: 'Python',
+              context:
+                'Used across FellahAI (FastAPI), the Hybrid IDPS (Django, scikit-learn), the movie recommender, and automation scripts at Vala Bleu.',
+            },
+            {
+              name: 'FastAPI',
+              context:
+                'Backend API serving Random Forest crop classification and plant stress detection in FellahAI.',
+            },
+            {
+              name: 'Django',
+              context:
+                'Live alert monitoring dashboard for the Hybrid IDPS academic project.',
+            },
+            {
+              name: 'Flask',
+              context: 'Web backend for the movie personality quiz project.',
+            },
+            {
+              name: 'scikit-learn',
+              context:
+                'Random Forest models for FellahAI and IDPS, plus Isolation Forest anomaly detection.',
+            },
+            {
+              name: 'NumPy',
+              context:
+                'Numerical vector processing for Sentinel-2 spectral indices and 20-feature network flow inputs.',
+            },
+            {
+              name: 'PHP (Laravel)',
+              context:
+                'Secure PHP/SQL web app (2023), Laravel work, and PHP security club sessions at RoDevBoot.',
+            },
+            {
+              name: 'SQL',
+              context:
+                'Database queries in the secure PHP/SQL web app (2023) and the C/MySQL desktop app.',
+            },
+          ],
+        },
+        {
+          id: 'mobile-systems',
+          filter: 'development',
+          index: '02',
+          variant: 'neutral',
+          title: 'Mobile and systems',
+          subtitle: 'Android clients, desktop tools, and statistical coursework',
+          tags: [
+            {
+              name: 'Kotlin',
+              context:
+                'Native Android client for FellahAI communicating with FastAPI and Gemini Live.',
+            },
+            {
+              name: 'Jetpack Compose',
+              context:
+                'Android UI toolkit used for the Darija chat and Souss-Massa weather screens in FellahAI.',
+            },
+            {
+              name: 'Flutter',
+              context:
+                'Initial mobile prototype framework before moving the FellahAI client to native Kotlin.',
+            },
+            {
+              name: 'C',
+              context:
+                'First-year desktop database interface built in C with GTK backed by MySQL.',
+            },
+            {
+              name: 'R',
+              context: 'Statistical computing and data analysis coursework.',
+            },
+          ],
+        },
+        {
+          id: 'security-defense',
+          filter: 'security',
+          index: '03',
+          variant: 'dark-featured',
+          title: 'Security and defense',
+          subtitle: 'Intrusion detection, firewalls, and web vulnerability training',
+          tags: [
+            {
+              name: 'Suricata',
+              context:
+                'Signature-based intrusion detection stage in the Hybrid IDPS pipeline.',
+            },
+            {
+              name: 'Kali Linux',
+              context:
+                'Lab testing environment used for simulated attacks against the Hybrid IDPS.',
+            },
+            {
+              name: 'pfSense',
+              context:
+                'Firewall configuration and perimeter security labs during DUT coursework.',
+            },
+            {
+              name: 'PortSwigger Web Security Academy training',
+              context:
+                'Web security training aligned with OWASP fixes (CORS, Broken Access Control, logging) applied at SobySoft.',
+            },
+          ],
+        },
+        {
+          id: 'networking-cloud',
+          filter: 'infrastructure',
+          index: '04',
+          variant: 'bordered-white',
+          title: 'Networking and infrastructure',
+          subtitle: 'Routing, switching topologies, containers, and cloud labs',
+          tags: [
+            {
+              name: 'Cisco IOS',
+              context:
+                'Router and switch CLI configuration during networking coursework at EST Kelaa.',
+            },
+            {
+              name: 'Packet Tracer',
+              context:
+                'Network topology simulation for VLANs and routing protocol labs.',
+            },
+            {
+              name: 'GNS3',
+              context:
+                'Virtual network emulation for multi-router routing and firewall topologies.',
+            },
+            {
+              name: 'VLANs',
+              context:
+                'Layer-2 network segmentation configured in switching lab exercises.',
+            },
+            {
+              name: 'Static routing',
+              context:
+                'Manual route configuration across multi-subnet lab topologies.',
+            },
+            {
+              name: 'RIPv2',
+              context:
+                'Dynamic distance-vector routing configured in Cisco IOS and GNS3 labs.',
+            },
+            {
+              name: 'Docker',
+              context:
+                'Containerized service packaging and isolated lab environments.',
+            },
+            {
+              name: 'OpenStack',
+              context:
+                'Private cloud VM and virtual networking coursework.',
+            },
+          ],
+        },
+      ],
       leadershipHeading: 'Leadership and clubs',
       leadershipItems: [
         {
@@ -695,55 +820,179 @@ export const SITE_CONTENT: Record<Lang, SiteDictionary> = {
     },
     skillsLeadership: {
       skillsHeading: 'Compétences',
-      languagesBlock: {
-        index: '01',
-        title: 'Langages et frameworks',
-        primary: [
-          {
-            name: 'Python',
-            detail: 'FastAPI · Flask · Django · scikit-learn · NumPy',
-          },
-          {
-            name: 'Kotlin',
-            detail: 'Jetpack Compose',
-          },
-          {
-            name: 'PHP',
-            detail: 'Laravel',
-          },
-        ],
-        secondary: ['Flutter', 'SQL', 'R', 'C'],
-      },
-      securityBlock: {
-        index: '02',
-        title: 'Sécurité, réseaux et infrastructure',
-        subgroups: [
-          {
-            label: 'Sécurité et outils défensifs',
-            items: [
-              'Suricata',
-              'Kali Linux',
-              'pfSense',
-              'Parcours PortSwigger Web Security Academy',
-            ],
-          },
-          {
-            label: 'Réseaux et routage',
-            items: [
-              'Cisco IOS',
-              'Packet Tracer',
-              'GNS3',
-              'VLANs',
-              'Routage statique',
-              'RIPv2',
-            ],
-          },
-          {
-            label: 'Conteneurs et cloud',
-            items: ['Docker', 'OpenStack'],
-          },
-        ],
-      },
+      skillsHint: 'Cliquez sur une compétence pour voir où je l’ai utilisée.',
+      clearTagLabel: 'Effacer',
+      skillsFilters: [
+        { id: 'all', label: 'Tout' },
+        { id: 'development', label: 'Développement & ML' },
+        { id: 'security', label: 'Sécurité' },
+        { id: 'infrastructure', label: 'Réseaux & Cloud' },
+      ],
+      skillCategories: [
+        {
+          id: 'backend-ml',
+          filter: 'development',
+          index: '01',
+          variant: 'accent-light',
+          title: 'Backend, web et ML',
+          subtitle: 'API, frameworks serveur et outils de machine learning',
+          tags: [
+            {
+              name: 'Python',
+              context:
+                "Utilisé pour FellahAI (FastAPI), l'IDPS hybride (Django, scikit-learn), le moteur de recommandation et les scripts d'automatisation chez Vala Bleu.",
+            },
+            {
+              name: 'FastAPI',
+              context:
+                'Serveur API exécutant la classification Random Forest et la détection de stress végétal dans FellahAI.',
+            },
+            {
+              name: 'Django',
+              context:
+                "Tableau de bord en direct des alertes pour le projet académique d'IDPS hybride.",
+            },
+            {
+              name: 'Flask',
+              context: 'Backend web du quiz de personnalité cinéma.',
+            },
+            {
+              name: 'scikit-learn',
+              context:
+                "Modèles Random Forest (FellahAI et IDPS) et détection d'anomalies Isolation Forest.",
+            },
+            {
+              name: 'NumPy',
+              context:
+                'Calcul numérique sur les indices spectraux Sentinel-2 et les vecteurs de flux réseau à 20 variables.',
+            },
+            {
+              name: 'PHP (Laravel)',
+              context:
+                'Application web sécurisée en PHP/SQL (2023), travaux sous Laravel et séances de sécurité PHP au club RoDevBoot.',
+            },
+            {
+              name: 'SQL',
+              context:
+                "Requêtes et schémas de bases de données pour l'application PHP/SQL (2023) et l'outil bureau C/MySQL.",
+            },
+          ],
+        },
+        {
+          id: 'mobile-systems',
+          filter: 'development',
+          index: '02',
+          variant: 'neutral',
+          title: 'Mobile et systèmes',
+          subtitle: 'Clients Android, outils bureau et calcul statistique',
+          tags: [
+            {
+              name: 'Kotlin',
+              context:
+                'Client Android natif de FellahAI connecté à FastAPI et Gemini Live.',
+            },
+            {
+              name: 'Jetpack Compose',
+              context:
+                'Interface Android utilisée pour la discussion en darija et la météo Souss-Massa dans FellahAI.',
+            },
+            {
+              name: 'Flutter',
+              context:
+                'Premier prototype mobile avant la migration de FellahAI vers Kotlin natif.',
+            },
+            {
+              name: 'C',
+              context:
+                'Application bureau de première année écrite en C avec GTK et MySQL.',
+            },
+            {
+              name: 'R',
+              context: 'Travaux pratiques en statistiques et analyse de données.',
+            },
+          ],
+        },
+        {
+          id: 'security-defense',
+          filter: 'security',
+          index: '03',
+          variant: 'dark-featured',
+          title: 'Sécurité et défense',
+          subtitle: 'Détection d’intrusion, pare-feu et sécurité applicative',
+          tags: [
+            {
+              name: 'Suricata',
+              context:
+                "Étage de détection par signatures dans la chaîne de traitement de l'IDPS hybride.",
+            },
+            {
+              name: 'Kali Linux',
+              context:
+                "Environnement de laboratoire utilisé pour simuler les attaques contre l'IDPS hybride.",
+            },
+            {
+              name: 'pfSense',
+              context:
+                'Travaux pratiques de pare-feu et de filtrage périmétrique en DUT.',
+            },
+            {
+              name: 'Parcours PortSwigger Web Security Academy',
+              context:
+                "Formation sécurité web alignée sur les correctifs OWASP (CORS, Broken Access Control, journalisation) appliqués chez SobySoft.",
+            },
+          ],
+        },
+        {
+          id: 'networking-cloud',
+          filter: 'infrastructure',
+          index: '04',
+          variant: 'bordered-white',
+          title: 'Réseaux et infrastructure',
+          subtitle: 'Routage, topologies, conteneurs et environnements cloud',
+          tags: [
+            {
+              name: 'Cisco IOS',
+              context:
+                'Configuration en ligne de commande de routeurs et commutateurs à l’EST Kelaa.',
+            },
+            {
+              name: 'Packet Tracer',
+              context:
+                'Simulation de topologies réseau pour les TP VLAN et routage.',
+            },
+            {
+              name: 'GNS3',
+              context:
+                'Émulation de réseaux virtuels multi-routeurs et pare-feu.',
+            },
+            {
+              name: 'VLANs',
+              context:
+                'Segmentation réseau de niveau 2 configurée lors des travaux pratiques.',
+            },
+            {
+              name: 'Routage statique',
+              context:
+                'Configuration manuelle de tables de routage entre sous-réseaux en laboratoire.',
+            },
+            {
+              name: 'RIPv2',
+              context:
+                'Protocole de routage dynamique configuré sous Cisco IOS et GNS3.',
+            },
+            {
+              name: 'Docker',
+              context:
+                'Conteneurisation de services et isolation d’environnements de test.',
+            },
+            {
+              name: 'OpenStack',
+              context:
+                'Travaux pratiques de machines virtuelles et réseaux virtuels en cloud privé.',
+            },
+          ],
+        },
+      ],
       leadershipHeading: 'Engagements et clubs',
       leadershipItems: [
         {
