@@ -1,4 +1,5 @@
 import { SHARED_CONTACT, SiteDictionary } from '../content/siteContent';
+import { CipherScramble } from './CipherScramble';
 import { MediaSlot } from './MediaSlot';
 
 interface HeroSectionProps {
@@ -18,9 +19,10 @@ export function HeroSection({ content, cvHref }: HeroSectionProps) {
               {content.name}
             </h1>
 
-            <p className="mt-4 max-w-xl text-xl font-medium leading-snug text-[#111816] sm:text-2xl text-balance">
-              {content.headline}
-            </p>
+            <CipherScramble
+              text={content.headline}
+              className="mt-4 max-w-xl text-xl font-medium leading-snug text-[#111816] sm:text-2xl text-balance"
+            />
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-[#4B5955]">
               {content.intro}
