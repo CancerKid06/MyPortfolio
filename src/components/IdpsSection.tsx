@@ -91,6 +91,7 @@ export function IdpsSection({ content }: IdpsSectionProps) {
               <MediaSlot
                 slot={content.dashboardScreen}
                 lightFrame
+                inspectable
                 objectFit="contain"
                 aspectClass="aspect-[4/3]"
               />
@@ -100,6 +101,7 @@ export function IdpsSection({ content }: IdpsSectionProps) {
               <MediaSlot
                 slot={content.alertScreen}
                 lightFrame
+                inspectable
                 objectFit="contain"
                 aspectClass="aspect-[4/3]"
               />
@@ -108,6 +110,7 @@ export function IdpsSection({ content }: IdpsSectionProps) {
             <div className="lg:col-span-12">
               <MediaSlot
                 slot={content.terminalScreen}
+                inspectable
                 objectFit="contain"
                 aspectClass="aspect-[21/8]"
               />
@@ -115,7 +118,7 @@ export function IdpsSection({ content }: IdpsSectionProps) {
 
             <div className="lg:col-span-12">
               {content.diagram.src ? (
-                <MediaSlot slot={content.diagram} lightFrame objectFit="contain" aspectClass="aspect-[21/9]" />
+                <MediaSlot slot={content.diagram} lightFrame inspectable objectFit="contain" aspectClass="aspect-[21/9]" />
               ) : (
                 <div className="rounded-xl border border-[#111816]/10 bg-white p-6 sm:p-8">
                   <h3 className="text-sm font-semibold text-[#111816]">

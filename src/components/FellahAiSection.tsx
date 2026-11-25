@@ -78,6 +78,7 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                 slot={content.weatherScreen}
                 darkSurface
                 lightFrame
+                inspectable
                 objectFit="contain"
                 aspectClass="aspect-[16/10]"
               />
@@ -87,6 +88,7 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                   slot={content.appScreens}
                   darkSurface
                   lightFrame
+                  inspectable
                   objectFit="contain"
                   aspectClass="aspect-[3/5]"
                 />
@@ -95,6 +97,7 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                   slot={content.diagram}
                   darkSurface
                   lightFrame
+                  inspectable
                   objectFit="contain"
                   aspectClass="aspect-[3/5]"
                 >

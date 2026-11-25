@@ -13,6 +13,7 @@ import { Navbar } from './components/Navbar';
 import { OtherProjectsSection } from './components/OtherProjectsSection';
 import { SkillsLeadershipSection } from './components/SkillsLeadershipSection';
 import { Lang, SITE_CONTENT } from './content/siteContent';
+import { LangContext } from './context/LangContext';
 
 const STORAGE_KEY = 'ali_portfolio_lang';
 
@@ -44,19 +45,21 @@ export default function App() {
   }, [lang, content.metaTitle]);
 
   return (
-    <div className="min-h-screen bg-white text-[#111816] font-sans">
-      <Navbar lang={lang} onToggleLang={setLang} content={content.nav} />
+    <LangContext.Provider value={lang}>
+      <div className="min-h-screen bg-white text-[#111816] font-sans">
+        <Navbar lang={lang} onToggleLang={setLang} content={content.nav} />
 
-      <main>
-        <HeroSection content={content.hero} cvHref={content.nav.cvHref} />
-        <FellahAiSection content={content.fellahAi} />
-        <IdpsSection content={content.idps} />
-        <OtherProjectsSection content={content.otherProjects} />
-        <ExperienceEducationSection content={content.experienceEducation} />
-        <SkillsLeadershipSection content={content.skillsLeadership} />
-      </main>
+        <main>
+          <HeroSection content={content.hero} cvHref={content.nav.cvHref} />
+          <FellahAiSection content={content.fellahAi} />
+          <IdpsSection content={content.idps} />
+          <OtherProjectsSection content={content.otherProjects} />
+          <ExperienceEducationSection content={content.experienceEducation} />
+          <SkillsLeadershipSection content={content.skillsLeadership} />
+        </main>
 
-      <Footer content={content.footer} />
-    </div>
+        <Footer content={content.footer} />
+      </div>
+    </LangContext.Provider>
   );
 }
