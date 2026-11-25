@@ -1,11 +1,32 @@
-<div align="center">
+# Ali Aitoufkir — Personal Portfolio
 
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+Static bilingual (English / French) personal portfolio built with React, TypeScript, Vite, and Tailwind CSS.
 
-  <h1>Built with AI Studio</h2>
+## Local development
 
-  <p>The fastest path from prompt to production with Gemini.</p>
+```bash
+npm install
+npm run dev
+```
 
-  <a href="https://aistudio.google.com/apps">Start building</a>
+## Production build
 
-</div>
+```bash
+npm run build
+```
+
+This generates the static bundle inside `dist/`. `vite.config.ts` uses `base: './'` so the built files work cleanly both at a domain root (`/`) and inside any sub-path folder (`/portfolio/`).
+
+## Media and PDF assets
+
+All CV, project screenshots, architecture diagrams, and PDF reports/presentations are stored in `public/assets/aistudio/` and wired in `src/content/siteContent.ts`:
+- `Ali_Aitoufkir_CV_882cf68c.pdf`
+- `hero.pic_1239e048.jpeg`
+- `Fellah_HomeScreen_ab3b5d71.jpg`, `Fellah_Screen_e37ceb7a.png`, `Fellah_pipeline_926ce84f.png`
+- `FellahAI_Report_85c03173.pdf`, `FellahAI_Presentation_1b0c1255.pdf`
+- `IDPS_HOMe_cef04eac.png`, `IDPS_Monitor_747f9340.png`, `IDPS_Terminal_025f12d5.png`
+- `IDPS_Report_a05b1e1c.pdf`, `IDPS_Presentation_047b280b.pdf`
+
+## Static deployment
+
+Run `npm run build` and upload the contents of `dist/` to any static hosting provider or static web server directory. No backend, database, or environment variables are required.
