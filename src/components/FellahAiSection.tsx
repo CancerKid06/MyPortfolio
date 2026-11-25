@@ -10,10 +10,10 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
   return (
     <section id="projects" className="bg-[#0B1F1C] py-16 text-white lg:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <Reveal>
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
-            {/* Left narrative and debugging breakdown */}
-            <div className="lg:col-span-6">
+        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
+          {/* Left narrative and debugging breakdown */}
+          <div className="lg:col-span-6">
+            <Reveal delay={0}>
               <p className="text-sm font-medium text-[#23D1B5]">{content.eyebrow}</p>
               <h2 className="mt-3 text-3xl font-bold tracking-tight text-white sm:text-4xl text-balance">
                 {content.title}
@@ -27,24 +27,27 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
               <p className="mt-4 text-base leading-relaxed text-white/75">
                 {content.datasetNote}
               </p>
+            </Reveal>
 
-              <div className="mt-8 border-t border-white/10 pt-8">
+            <div className="mt-8 border-t border-white/10 pt-8">
+              <Reveal delay={80}>
                 <h3 className="text-lg font-semibold text-white">{content.bugsHeading}</h3>
-                <dl className="mt-4 space-y-4">
-                  {content.bugs.map((bug) => (
-                    <div
-                      key={bug.title}
-                      className="rounded-xl border border-white/10 bg-[#102A26] p-4"
-                    >
+              </Reveal>
+              <dl className="mt-4 space-y-4">
+                {content.bugs.map((bug, index) => (
+                  <Reveal key={bug.title} delay={120 + index * 90}>
+                    <div className="rounded-xl border border-white/10 bg-[#102A26] p-4 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:border-[#23D1B5]/45 hover:shadow-lg hover:shadow-black/25 motion-reduce:transform-none">
                       <dt className="text-sm font-semibold text-[#23D1B5]">{bug.title}</dt>
                       <dd className="mt-1 text-sm leading-relaxed text-white/80">
                         {bug.detail}
                       </dd>
                     </div>
-                  ))}
-                </dl>
-              </div>
+                  </Reveal>
+                ))}
+              </dl>
+            </div>
 
+            <Reveal delay={160}>
               <div className="mt-8 border-t border-white/10 pt-6">
                 <p className="text-xs font-medium text-white/60">{content.stackLabel}</p>
                 <p className="mt-2 font-mono text-xs leading-relaxed text-white/85">
@@ -70,10 +73,12 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                   </a>
                 </div>
               </div>
-            </div>
+            </Reveal>
+          </div>
 
-            {/* Right media slots: Weather screen + Darija mobile screen & Architecture diagram */}
-            <div className="space-y-6 lg:col-span-6">
+          {/* Right media slots: Weather screen + Darija mobile screen & Architecture diagram */}
+          <div className="space-y-6 lg:col-span-6">
+            <Reveal delay={100}>
               <MediaSlot
                 slot={content.weatherScreen}
                 darkSurface
@@ -82,8 +87,10 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                 objectFit="contain"
                 aspectClass="aspect-[16/10]"
               />
+            </Reveal>
 
-              <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              <Reveal delay={180}>
                 <MediaSlot
                   slot={content.appScreens}
                   darkSurface
@@ -92,7 +99,9 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                   objectFit="contain"
                   aspectClass="aspect-[3/5]"
                 />
+              </Reveal>
 
+              <Reveal delay={270}>
                 <MediaSlot
                   slot={content.diagram}
                   darkSurface
@@ -123,10 +132,10 @@ export function FellahAiSection({ content }: FellahAiSectionProps) {
                     </div>
                   </div>
                 </MediaSlot>
-              </div>
+              </Reveal>
             </div>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

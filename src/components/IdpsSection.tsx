@@ -14,7 +14,7 @@ export function IdpsSection({ content }: IdpsSectionProps) {
   return (
     <section className="border-b border-[#111816]/8 bg-[#F4F6F6] py-16 lg:py-24">
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
-        <Reveal>
+        <Reveal delay={0}>
           <div className="max-w-3xl">
             <p className="text-sm font-medium text-[#007D6A]">{content.eyebrow}</p>
             <h2 className="mt-3 text-3xl font-bold tracking-tight text-[#111816] sm:text-4xl text-balance">
@@ -23,9 +23,11 @@ export function IdpsSection({ content }: IdpsSectionProps) {
             <p className="mt-6 text-base leading-relaxed text-[#111816]">{content.lead}</p>
             <p className="mt-4 text-base leading-relaxed text-[#4B5955]">{content.flowNote}</p>
           </div>
+        </Reveal>
 
-          {/* Lab Test Results Strip */}
-          <div className="mt-12 rounded-xl border border-[#111816]/10 bg-white p-6 sm:p-8">
+        {/* Lab Test Results Strip */}
+        <Reveal delay={100}>
+          <div className="mt-12 rounded-xl border border-[#111816]/10 bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:border-[#007D6A]/45 hover:shadow-md hover:shadow-[#111816]/8 motion-reduce:transform-none sm:p-8">
             <div className="flex flex-col gap-2 border-b border-[#111816]/8 pb-4 sm:flex-row sm:items-baseline sm:justify-between">
               <h3 className="text-base font-semibold text-[#111816]">{content.labLabel}</h3>
               <p className="text-xs text-[#4B5955]">{content.labSummary}</p>
@@ -84,10 +86,12 @@ export function IdpsSection({ content }: IdpsSectionProps) {
               </p>
             )}
           </div>
+        </Reveal>
 
-          {/* Screenshots + Terminal Simulation + Pipeline Diagram */}
-          <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
-            <div className="lg:col-span-6">
+        {/* Screenshots + Terminal Simulation + Pipeline Diagram */}
+        <div className="mt-12 grid grid-cols-1 gap-8 lg:grid-cols-12">
+          <div className="lg:col-span-6">
+            <Reveal delay={80}>
               <MediaSlot
                 slot={content.dashboardScreen}
                 lightFrame
@@ -95,9 +99,11 @@ export function IdpsSection({ content }: IdpsSectionProps) {
                 objectFit="contain"
                 aspectClass="aspect-[4/3]"
               />
-            </div>
+            </Reveal>
+          </div>
 
-            <div className="lg:col-span-6">
+          <div className="lg:col-span-6">
+            <Reveal delay={180}>
               <MediaSlot
                 slot={content.alertScreen}
                 lightFrame
@@ -105,22 +111,26 @@ export function IdpsSection({ content }: IdpsSectionProps) {
                 objectFit="contain"
                 aspectClass="aspect-[4/3]"
               />
-            </div>
+            </Reveal>
+          </div>
 
-            <div className="lg:col-span-12">
+          <div className="lg:col-span-12">
+            <Reveal delay={120}>
               <MediaSlot
                 slot={content.terminalScreen}
                 inspectable
                 objectFit="contain"
                 aspectClass="aspect-[21/8]"
               />
-            </div>
+            </Reveal>
+          </div>
 
-            <div className="lg:col-span-12">
+          <div className="lg:col-span-12">
+            <Reveal delay={140}>
               {content.diagram.src ? (
                 <MediaSlot slot={content.diagram} lightFrame inspectable objectFit="contain" aspectClass="aspect-[21/9]" />
               ) : (
-                <div className="rounded-xl border border-[#111816]/10 bg-white p-6 sm:p-8">
+                <div className="rounded-xl border border-[#111816]/10 bg-white p-6 transition-[transform,border-color,box-shadow] duration-200 ease-out hover:-translate-y-1 hover:border-[#007D6A]/45 hover:shadow-md hover:shadow-[#111816]/8 motion-reduce:transform-none sm:p-8">
                   <h3 className="text-sm font-semibold text-[#111816]">
                     {content.diagram.caption}
                   </h3>
@@ -198,9 +208,9 @@ export function IdpsSection({ content }: IdpsSectionProps) {
                   </div>
                 </div>
               )}
-            </div>
+            </Reveal>
           </div>
-        </Reveal>
+        </div>
       </div>
     </section>
   );

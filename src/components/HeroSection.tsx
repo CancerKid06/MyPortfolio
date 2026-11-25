@@ -1,6 +1,7 @@
 import { SHARED_CONTACT, SiteDictionary } from '../content/siteContent';
 import { CipherScramble } from './CipherScramble';
 import { MediaSlot } from './MediaSlot';
+import { Reveal } from './Reveal';
 
 interface HeroSectionProps {
   content: SiteDictionary['hero'];
@@ -13,6 +14,7 @@ export function HeroSection({ content, cvHref }: HeroSectionProps) {
       <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
           <div className="lg:col-span-7">
+            <Reveal delay={0} distance={20}>
             <p className="text-sm font-medium text-[#4B5955]">{content.originLine}</p>
 
             <h1 className="mt-4 text-4xl font-bold leading-[1.1] tracking-tight text-[#111816] sm:text-5xl text-balance">
@@ -66,15 +68,18 @@ export function HeroSection({ content, cvHref }: HeroSectionProps) {
                 </a>
               </div>
             </div>
+            </Reveal>
           </div>
 
           <div className="lg:col-span-5">
-            <MediaSlot
-              slot={content.visual}
-              aspectClass="aspect-square"
-              objectFit="cover"
-              objectPosition="object-top"
-            />
+            <Reveal delay={140} distance={24}>
+              <MediaSlot
+                slot={content.visual}
+                aspectClass="aspect-square"
+                objectFit="cover"
+                objectPosition="object-top"
+              />
+            </Reveal>
           </div>
         </div>
       </div>

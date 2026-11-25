@@ -2,12 +2,20 @@ import { ReactNode, useEffect, useRef, useState } from 'react';
 
 interface RevealProps {
   children: ReactNode;
+  delay?: number;
+  distance?: number;
   className?: string;
 }
 
-export function Reveal({ children, className = '' }: RevealProps) {
+export function Reveal({
+  children,
+  delay = 0,
+  distance = 24,
+  className = '',
+}: RevealProps) {
   const ref = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  const [settled, setSettled] = useState(false);
 
   useEffect(() => {
     const node = ref.current;
@@ -15,12 +23,7 @@ export function Reveal({ children, className = '' }: RevealProps) {
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setVisible(true);
-      return;
-    }
-
-    const rect = node.getBoundingClientRect();
-    if (rect.top < window.innerHeight * 0.95) {
-      setVisible(true);
+      setSettled(true);
       return;
     }
 
@@ -33,7 +36,10 @@ export function Reveal({ children, className = '' }: RevealProps) {
           }
         });
       },
-      { threshold: 0.06 }
+      {
+        threshold: 0.08,
+        rootMargin: '0px 0px -40px 0px',
+      }
     );
 
     observer.observe(node);
@@ -43,9 +49,24 @@ export function Reveal({ children, className = '' }: RevealProps) {
   return (
     <div
       ref={ref}
-      className={`reveal-node transition-[opacity,transform] duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-        visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-3'
-      } ${className}`}
+      onTransitionEnd={(event) => {
+        if (event.target === ref.current && visible) {
+          setSettled(true);
+        }
+      }}
+      style={{
+        opacity: visible ? 1 : 0,
+        transform: settled
+          ? 'none'
+          : visible
+            ? 'translate3d(0, 0, 0)'
+            : `translate3d(0, ${distance}px, 0)`,
+        transitionProperty: 'opacity, transform',
+        transitionDuration: '620ms',
+        transitionTimingFunction: 'cubic-bezier(0.22, 1, 0.36, 1)',
+        transitionDelay: `${delay}ms`,
+      }}
+      className={`reveal-node ${className}`}
     >
       {children}
     </div>
